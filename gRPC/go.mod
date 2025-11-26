@@ -1,4 +1,4 @@
-module github.com/JhonathanHerrera/grpc
+module gRPC
 
 go 1.24.4
 
