@@ -1,0 +1,130 @@
+Connection Commands
+
+# Connect to PostgreSQL with default user
+psql
+
+# Connect to specific database
+psql -d database_name
+
+# Connect with specific user
+psql -U username
+
+# Connect to specific database with specific user
+psql -U username -d database_name
+
+# Connect to remote host
+psql -h hostname -U username -d database_name
+
+# Connect with password prompt
+psql -U username -W
+
+# Full connection string
+psql "postgresql://username:password@localhost:5432/database_name"
+
+
+--------------------------------------------------------------------------------
+
+Database Management
+
+# Create database
+createdb database_name
+createdb -U postgres testdb
+
+# Delete database
+dropdb database_name
+
+# Create user/role
+createuser username
+createuser -s postgres  # with superuser privileges
+
+# Delete user/role
+dropuser username
+
+--------------------------------------------------------------------------------
+
+Inside psql (\commands)
+Database Commands
+
+\l                    -- List all databases
+\l+                   -- List databases with size and description
+\c database_name      -- Connect to a database
+\conninfo             -- Display connection information
+\q                    -- Quit/exit psql
+
+Table Commands
+
+\dt                   -- List all tables in current database
+\dt+                  -- List tables with size
+\dt schema.*          -- List tables in specific schema
+\d                    -- List all relations (tables, views, sequences)
+\d table_name         -- Describe table structure
+\d+ table_name        -- Detailed table description
+\di                   -- List all indexes
+\dv                   -- List all views
+\ds                   -- List all sequences
+
+Schema Commands
+
+\dn                   -- List all schemas
+\dn+                  -- List schemas with permissions
+
+User & Permission Commands
+
+\du                   -- List all users/roles
+\du+                  -- List users with more details
+\dp table_name        -- Show table permissions
+\z table_name         -- Same as \dp (show access privileges)
+
+Function & Procedure Commands
+
+\df                   -- List all functions
+\df+                  -- List functions with details
+\df schema.*          -- List functions in schema
+
+Other Useful Commands
+
+\x                    -- Toggle expanded output (vertical display)
+\x auto               -- Auto expanded output
+\timing               -- Toggle query execution timing
+\timing on/off        -- Turn timing on/off
+\! command            -- Execute shell command
+\! clear              -- Clear screen (or use Ctrl+L)
+\e                    -- Open query in text editor
+\i filename.sql       -- Execute SQL from file
+\o filename           -- Send query results to file
+\o                    -- Stop output to file
+\h                    -- SQL help
+\h SELECT             -- Help on specific SQL command
+\?                    -- Help on psql commands
+\s                    -- Command history
+\s filename           -- Save command history to file
+
+SQL Query Commands
+
+-- View all data from table
+SELECT * FROM table_name;
+
+-- View with limit
+SELECT * FROM table_name LIMIT 10;
+
+-- View specific columns
+SELECT column1, column2 FROM table_name;
+
+-- Filter data
+SELECT * FROM table_name WHERE condition;
+
+-- Count rows
+SELECT COUNT(*) FROM table_name;
+
+-- Order results
+SELECT * FROM table_name ORDER BY column_name DESC;
+
+-- Get table size
+SELECT pg_size_pretty(pg_total_relation_size('table_name'));
+
+-- Get database size
+SELECT pg_size_pretty(pg_database_size('database_name'));
+
+Pro Tip: You can combine multiple commands in psql:
+
+psql -U postgres -d testdb -c "SELECT * FROM product;"
