@@ -1,0 +1,22 @@
+CREATE TABLE authors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    author_id INTEGER,
+    genre TEXT,
+    FOREIGN KEY (author_id) REFERENNCES authors(id)
+);
+
+CREATE TABLE members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    join_data TEXT NOT NULL DEFAULT CURRENT_DATE
+);
+
+
